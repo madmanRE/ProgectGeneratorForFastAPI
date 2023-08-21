@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 9090
+    ports:
+      - "8000:9090"
+    volumes:
+      - ./src:/app/src
+    links:
+      - redis
+      - postgres
+
+
+  redis:
+    image: "redis:latest"
+    container_name: "redis"
+
+  postgres:
+    image: "postgres:latest"
+    container_name: "postgres"
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "admin"
