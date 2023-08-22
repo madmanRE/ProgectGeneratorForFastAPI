@@ -10,7 +10,7 @@ from redis import asyncio as aioredis
 
 from sqladmin import Admin, ModelView
 from database import engine, User
-from models import *
+from models import models
 
 from starlette.responses import RedirectResponse
 
@@ -32,7 +32,18 @@ class UserAdmin(ModelView, model=User):
     icon = "fa-solid fa-user"
 
 
+class BookAdmin(ModelView, model=models.book):
+    column_list = [
+        models.book.c["id"],
+        models.book.c["title"],
+    ]
+    name = "Book"
+    name_plural = "Books"
+    icon = "fa-solid fa-book"
+
+
 admin.add_view(UserAdmin)
+admin.add_view(BookAdmin)
 
 app.include_router(auth_router.auth_router)
 app.include_router(book_router.book_router)
