@@ -1,6 +1,6 @@
 # ProgectGenerator
 
-***A lightweight template for a project on the FastAPI framework.***
+***A lightweight template for a project with the FastAPI framework.***
 
 ___
 
