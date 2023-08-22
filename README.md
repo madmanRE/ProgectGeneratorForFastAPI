@@ -37,6 +37,7 @@ ___
 │   │   └── models.py
 │   └── routers
 │   │   ├── __init__.py
+│   │   ├── book_router.py
 │   │   └── auth_router.py
 │   └── test
 │   │   ├── __init__.py
