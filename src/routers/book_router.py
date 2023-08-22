@@ -14,10 +14,7 @@ from database import get_async_session
 
 from fastapi.encoders import jsonable_encoder
 
-book_router = APIRouter(
-    prefix='/book',
-    tags=['Book']
-)
+book_router = APIRouter(prefix="/book", tags=["Book"])
 
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
@@ -35,9 +32,11 @@ async def get_all_books(session: AsyncSession = Depends(get_async_session)):
 
 
 @book_router.post("/add/")
-async def add_book(new_book: schemas.SchemaBook,
-                   session: AsyncSession = Depends(get_async_session),
-                   user: User = Depends(current_user)):
+async def add_book(
+    new_book: schemas.SchemaBook,
+    session: AsyncSession = Depends(get_async_session),
+    user: User = Depends(current_user),
+):
     smtp = insert(models.book).values(**new_book.dict())
     await session.execute(smtp)
     await session.commit()
@@ -45,11 +44,12 @@ async def add_book(new_book: schemas.SchemaBook,
 
 
 @book_router.delete("/delete/")
-async def del_book(book_id: int, session: AsyncSession = Depends(get_async_session),
-                   user: User = Depends(current_user)):
+async def del_book(
+    book_id: int,
+    session: AsyncSession = Depends(get_async_session),
+    user: User = Depends(current_user),
+):
     smtp = delete(models.book).where(models.book.c.id == book_id)
     await session.execute(smtp)
     await session.commit()
     return {"message": "Book has been deleted"}
-
-
