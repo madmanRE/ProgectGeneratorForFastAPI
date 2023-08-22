@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, HTTPException, Depends
 from starlette.middleware.base import BaseHTTPMiddleware
-from routers import auth_router
-from routers.auth_router import current_user
+from routers import auth_router, book_router
+
 
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -35,6 +35,7 @@ class UserAdmin(ModelView, model=User):
 admin.add_view(UserAdmin)
 
 app.include_router(auth_router.auth_router)
+app.include_router(book_router.book_router)
 
 
 class RedirectMiddleware(BaseHTTPMiddleware):

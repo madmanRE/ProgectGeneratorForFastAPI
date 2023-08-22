@@ -1,5 +1,6 @@
 import uuid
 from typing import Optional
+from pydantic import BaseModel
 
 from fastapi_users import schemas
 
@@ -25,3 +26,8 @@ class UserCreate(schemas.BaseUserCreate):
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
     is_verified: Optional[bool] = False
+
+
+class SchemaBook(BaseModel):
+    title: str
+    description: Optional[str] = None

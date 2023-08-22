@@ -35,3 +35,11 @@ user = Table(
     Column("is_superuser", Boolean, default=False, nullable=False),
     Column("is_verified", Boolean, default=False, nullable=False),
 )
+
+book = Table(
+    "book",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("title", String),
+    Column("description", String),
+)
